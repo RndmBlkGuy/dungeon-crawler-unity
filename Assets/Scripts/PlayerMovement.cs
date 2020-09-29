@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -99,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (other.gameObject.CompareTag("Goal"))
         {
-            Application.LoadLevel("Sample Scene");
+            SceneManager.LoadScene(1);
         }
     }
 
