@@ -29,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
 
     public GameMaster gm;
 
+    public Transform CollectableGrab;
+
     void Start()
     {
         keys = new HashSet<string>();
@@ -94,7 +96,8 @@ public class PlayerMovement : MonoBehaviour
 
             collectTone.Play();
             //keys.Add(other.gameObject.getComponent<CollectableRotate>.keyName);
-            other.gameObject.SetActive(false);   
+            other.gameObject.SetActive(false);  
+            
             
         }
 
@@ -102,6 +105,8 @@ public class PlayerMovement : MonoBehaviour
         {
             SceneManager.LoadScene(1);
         }
+
+        
     }
 
     public bool playerHasKey(string key)
