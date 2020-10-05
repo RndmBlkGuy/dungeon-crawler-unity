@@ -13,14 +13,17 @@ public class Collectable : MonoBehaviour
     public float pickUpRange;
     public float dropForwardForce, dropUpwardForce;
 
-   
-    
+    public bool holding;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
-       
+
         rb.isKinematic = false;
         coll.isTrigger = false;
+        holding = false;
     }
 
     // Update is called once per frame
@@ -28,15 +31,15 @@ public class Collectable : MonoBehaviour
     {
         //Check if player is in range and "E" is pressed
         Vector3 distanceToPlayer = player.position - transform.position;
-        if (distanceToPlayer.magnitude <= pickUpRange && Input.GetKeyDown(KeyCode.E)) PickUp();
+        if ((distanceToPlayer.magnitude <= pickUpRange && Input.GetKeyDown(KeyCode.E)) && !holding) PickUp();
 
         //Drop if equipped and "Q" is pressed
-        //if (Input.GetKeyDown(KeyCode.Q)) Drop();
+        if (Input.GetKeyDown(KeyCode.Q) && holding) Drop();
     }
 
     private void PickUp()
     {
-        
+        //Debug.Log("Pickup Called");
 
         //Make weapon a child of the camera and move it to default position
         transform.SetParent(collectGrab);
@@ -47,18 +50,20 @@ public class Collectable : MonoBehaviour
         //Make Rigidbody kinematic and BoxCollider a trigger
         rb.isKinematic = true;
         coll.isTrigger = true;
+        holding = true;
 
     }
 
     private void Drop()
     {
-       
+
         //Set parent to null
         transform.SetParent(null);
 
         //Make Rigidbody not kinematic and BoxCollider normal
         rb.isKinematic = false;
         coll.isTrigger = false;
+        holding = false;
 
         //Gun carries momentum of player
         rb.velocity = player.GetComponent<Rigidbody>().velocity;
@@ -70,6 +75,8 @@ public class Collectable : MonoBehaviour
         float random = Random.Range(-1f, 1f);
         rb.AddTorque(new Vector3(random, random, random) * 10);
 
-       
+
     }
+
+ 
 }

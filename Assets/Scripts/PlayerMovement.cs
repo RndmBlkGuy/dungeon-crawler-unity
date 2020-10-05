@@ -92,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
         //Check the provided Collider parameter other to see if it is tagged "PickUp", if it is...
         if (other.gameObject.CompareTag("Collectable"))
         {
-            gm.keys.Add(other.gameObject.name);
+            //gm.keys.Add(other.gameObject.name);
 
             collectTone.Play();
             //keys.Add(other.gameObject.getComponent<CollectableRotate>.keyName);
